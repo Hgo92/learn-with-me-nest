@@ -9,7 +9,7 @@ import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from '@thallesp/nestjs-better-auth';
 import { auth } from 'auth';
-import { AuthGuard } from 'node_modules/@thallesp/nestjs-better-auth/dist';
+import { AuthGuard } from '@thallesp/nestjs-better-auth';
 import { APP_GUARD } from '@nestjs/core';
 
 @Module({

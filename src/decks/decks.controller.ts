@@ -23,13 +23,16 @@ export class DecksController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number, @Session() session: any) {
+  findOne(
+    @Param('id', ParseIntPipe) id: number,
+    @Session() session: UserSession,
+  ) {
     return this.decksService.findOne(id, session.user.id);
   }
 
   @Post()
   create(@Body() newDeck: newDeckClass, @Session() session: UserSession) {
-    return;
+    return this.decksService.create(newDeck, session.user.id);
   }
 
   @Put(':id')
