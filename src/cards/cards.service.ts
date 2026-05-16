@@ -1,4 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Card } from './cards.entity';
+import { Repository } from 'typeorm';
+import { cardClass } from './cardClass';
 
 @Injectable()
-export class CardsService {}
+export class CardsService {
+  constructor(
+    @InjectRepository(Card)
+    private cardsRepository: Repository<Card>,
+  ) {}
+
+  findAllByUser(userId: string) {
+    return this.cardsRepository.find({ where: { userId } });
+  }
+
+  async findOne(id: number, userId: string) {
+    const card = await this.cardsRepository.findOne({ where: { id } });
+    if (!card) throw new NotFoundException('Carte non trouvée');
+    if (card.userId !== userId) throw new ForbiddenException();
+    return card;
+  }
+
+  create(newCard: cardClass, userId: string) {
+    const card = this.cardsRepository.create({ ...newCard, userId });
+    return this.cardsRepository.save(card);
+  }
+
+  async update(id: number, newCard: cardClass, userId: string) {
+    const card = await this.findOne(id, userId);
+    Object.assign(card, newCard);
+    return this.cardsRepository.save(card);
+  }
+
+  async remove(id: number, userId: string) {
+    const card = await this.findOne(id, userId);
+    return this.cardsRepository.remove(card);
+  }
+}
