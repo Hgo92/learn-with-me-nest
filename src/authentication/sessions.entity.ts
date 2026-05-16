@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { User } from 'src/users/users.entity';
 
@@ -25,8 +26,12 @@ export class Session {
   @Column({ nullable: true })
   userAgent?: string;
 
-  @ManyToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
+  @Column()
   userId!: string;
+
+  @ManyToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
+  user!: User;
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt!: Date;

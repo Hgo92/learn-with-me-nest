@@ -5,7 +5,8 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToOne,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 // Le schéma de ma table accounts
@@ -16,6 +17,9 @@ export class Account {
 
   @Column()
   accountId!: string;
+
+  @Column()
+  userId!: string;
 
   @Column({ unique: true })
   providerId!: string;
@@ -45,6 +49,7 @@ export class Account {
   updatedAt!: Date;
 
   // Relations
-  @OneToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
-  userId!: string;
+  @ManyToOne(() => User, (user) => user.id, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
+  user!: User;
 }

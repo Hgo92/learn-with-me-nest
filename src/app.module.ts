@@ -9,6 +9,8 @@ import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from '@thallesp/nestjs-better-auth';
 import { auth } from 'auth';
+import { AuthGuard } from 'node_modules/@thallesp/nestjs-better-auth/dist';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -16,9 +18,13 @@ import { auth } from 'auth';
     DatabaseModule,
     CardsModule,
     UsersModule,
-    // AuthModule.forRoot({ auth }), A remettre quand j'aurai un compte
+    AuthModule.forRoot({ auth }),
   ],
   controllers: [AppController, UsersController],
-  providers: [AppService, UsersService],
+  providers: [
+    AppService,
+    UsersService,
+    { provide: APP_GUARD, useClass: AuthGuard }, // Protège toutes les routes par défaut grâce au AuthGuard de Better Auth
+  ],
 })
 export class AppModule {}
