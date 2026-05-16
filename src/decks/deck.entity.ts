@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
   ManyToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('decks') // ← nom de la table
@@ -21,7 +22,10 @@ export class Deck {
   @OneToMany(() => Card, (card) => card.deck)
   cards!: Card[];
 
+  @Column()
+  userId!: string;
   @ManyToOne(() => User, (user) => user.decks, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'userId' })
   user!: User;
 
   @UpdateDateColumn()
