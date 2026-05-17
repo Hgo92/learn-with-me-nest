@@ -19,7 +19,7 @@ export class Card {
   @Column({ length: 100 })
   title!: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text' })
   translation!: string;
 
   @ManyToOne(() => Deck, (deck) => deck.cards, { onDelete: 'CASCADE' })
