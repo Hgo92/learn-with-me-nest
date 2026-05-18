@@ -8,6 +8,7 @@ export const auth = betterAuth({
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
   }),
+  trustedOrigins: ['http://localhost:5173'],
   user: {
     modelName: 'users',
   },
