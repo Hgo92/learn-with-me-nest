@@ -8,7 +8,10 @@ export const auth = betterAuth({
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
   }),
-  trustedOrigins: ['http://localhost:5173'],
+  trustedOrigins: [
+    'http://localhost:5173',
+    'https://learn-with-me-nest.vercel.app',
+  ],
   advanced: {
     useSecureCookies: true,
     cookieOptions: {
