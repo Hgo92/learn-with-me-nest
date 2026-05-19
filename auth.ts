@@ -9,6 +9,9 @@ export const auth = betterAuth({
     connectionString: process.env.DATABASE_URL,
   }),
   trustedOrigins: ['http://localhost:5173'],
+  advanced: {
+    useSecureCookies: true,
+  },
   user: {
     modelName: 'users',
   },
@@ -19,7 +22,7 @@ export const auth = betterAuth({
     modelName: 'accounts',
   },
   verification: {
-    modelName: 'verification', // adapte selon ton nom de table exact
+    modelName: 'verification',
   },
   emailAndPassword: {
     enabled: true,
