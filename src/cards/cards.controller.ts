@@ -44,7 +44,7 @@ export class CardsController {
     return this.cardsService.update(id, newCard, session.user.id);
   }
 
-  @Delete('id')
+  @Delete(':id')
   remove(
     @Param('id', ParseIntPipe) id: number,
     @Session() session: UserSession,
