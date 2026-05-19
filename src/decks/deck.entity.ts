@@ -11,7 +11,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-@Entity('decks') // ← nom de la table
+@Entity('decks')
 export class Deck {
   @PrimaryGeneratedColumn()
   id!: number;
