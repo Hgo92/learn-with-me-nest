@@ -4,9 +4,9 @@ import { config } from 'dotenv';
 import { User } from '../users/users.entity';
 import { Card } from '../cards/cards.entity';
 import { Deck } from '../decks/deck.entity';
-import { Account } from 'src/authentication/accounts.entity';
-import { Session } from 'src/authentication/sessions.entity';
-import { Verification } from 'src/authentication/verification.entity';
+import { Account } from '../authentication/accounts.entity';
+import { Session } from '../authentication/sessions.entity';
+import { Verification } from '../authentication/verification.entity';
 
 config();
 
