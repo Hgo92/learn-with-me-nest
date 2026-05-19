@@ -6,7 +6,7 @@ async function bootstrap() {
     bodyParser: false,
   });
   app.enableCors({
-    origin: ['http://localhost:5173', 'https://learn-with-me-nest.vercel.app'],
+    origin: ['http://localhost:5173', 'https://learnwithme-front.vercel.app/'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],

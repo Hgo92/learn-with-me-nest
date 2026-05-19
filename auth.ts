@@ -10,7 +10,7 @@ export const auth = betterAuth({
   }),
   trustedOrigins: [
     'http://localhost:5173',
-    'https://learn-with-me-nest.vercel.app',
+    'https://learnwithme-front.vercel.app/',
   ],
   advanced: {
     useSecureCookies: true,
