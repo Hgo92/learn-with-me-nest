@@ -22,7 +22,10 @@ export class Card {
   @Column({ type: 'text' })
   translation!: string;
 
+  @Column()
+  deckId!: number;
   @ManyToOne(() => Deck, (deck) => deck.cards, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'deckId' })
   deck!: Deck;
 
   @Column()
