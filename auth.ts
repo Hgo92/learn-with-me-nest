@@ -21,7 +21,11 @@ export const auth = betterAuth({
   ],
   advanced: {
     // N'active secureCookies QUE si on est sur Vercel/Production
-    useSecureCookies: process.env.NODE_ENV === 'production',
+    useSecureCookies: true,
+    defaultCookieAttributes: {
+      secure: true,
+      sameSite: 'none',
+    },
   },
   user: { modelName: 'users' },
   session: {
