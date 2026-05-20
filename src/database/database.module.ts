@@ -1,3 +1,4 @@
+// database.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';
@@ -16,8 +17,14 @@ config();
       type: 'postgres',
       url: process.env.DATABASE_URL,
       entities: [User, Card, Deck, Account, Session, Verification],
-      synchronize: true, // Je dois le couper une fois en production
-      ssl: true, // Nécessaire pour Neon
+      synchronize: process.env.NODE_ENV !== 'production',
+      logging: true,
+      ssl: true,
+      extra: {
+        max: 10,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 2000,
+      },
     }),
   ],
 })

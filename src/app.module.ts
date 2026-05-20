@@ -24,7 +24,7 @@ import { APP_GUARD } from '@nestjs/core';
   providers: [
     AppService,
     UsersService,
-    // { provide: APP_GUARD, useClass: AuthGuard }, // Protège toutes les routes par défaut grâce au AuthGuard de Better Auth
+    { provide: APP_GUARD, useClass: AuthGuard }, // Protège toutes les routes par défaut grâce au AuthGuard de Better Auth
   ],
 })
 export class AppModule {}
