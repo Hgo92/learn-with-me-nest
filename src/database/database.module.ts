@@ -17,7 +17,7 @@ config();
       type: 'postgres',
       url: process.env.DATABASE_URL,
       entities: [User, Card, Deck, Account, Session, Verification],
-      synchronize: process.env.NODE_ENV !== 'production',
+      synchronize: false,
       logging: true,
       ssl: true,
       extra: {
