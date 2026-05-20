@@ -11,7 +11,7 @@ export class AppController {
   @Get('test-decks')
   @AllowAnonymous()
   async getDecks() {
-    const deckRepository = this.dataSource.getRepository(Deck);
-    return await deckRepository.find();
+    // On court-circuites complètement TypeORM pour ce test
+    return { status: 'ok', message: 'Zéro appel base de données' };
   }
 }
