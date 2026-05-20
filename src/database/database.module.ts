@@ -18,7 +18,6 @@ config();
       url: process.env.DATABASE_URL,
       entities: [User, Card, Deck, Account, Session, Verification],
       synchronize: false,
-      logging: true,
       ssl: true,
       extra: {
         max: 10,
