@@ -22,6 +22,14 @@ export class CardsController {
     return this.cardsService.findAllByUser(session.user.id);
   }
 
+  @Get('by-deck/:deckId')
+  findByDeck(
+    @Param('deckId', ParseIntPipe) deckId: number,
+    @Session() session: UserSession,
+  ) {
+    return this.cardsService.findByDeck(deckId, session.user.id);
+  }
+
   @Get(':id')
   findOne(
     @Param('id', ParseIntPipe) id: number,

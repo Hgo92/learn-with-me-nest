@@ -19,6 +19,18 @@ export class CardsService {
     return this.cardsRepository.find({ where: { userId } });
   }
 
+  findByDeck(deckId: number, userId: string) {
+    return this.cardsRepository.find({
+      where: { deckId, userId },
+      select: {
+        id: true,
+        title: true,
+        translation: true,
+        deckId: true,
+      },
+    });
+  }
+
   async findOne(id: number, userId: string) {
     const card = await this.cardsRepository.findOne({ where: { id } });
     if (!card) throw new NotFoundException('Carte non trouvée');
