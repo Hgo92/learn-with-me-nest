@@ -6,6 +6,7 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  Index,
 } from 'typeorm';
 
 @Entity('cards')
@@ -19,12 +20,14 @@ export class Card {
   @Column({ type: 'text' })
   translation!: string;
 
+  @Index()
   @Column()
   deckId!: number;
   @ManyToOne(() => Deck, (deck) => deck.cards, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'deckId' })
   deck!: Deck;
 
+  @Index()
   @Column()
   userId!: string;
   @ManyToOne(() => User, (user) => user.cards, { onDelete: 'CASCADE' })

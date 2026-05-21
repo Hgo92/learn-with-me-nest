@@ -9,6 +9,7 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  Index,
 } from 'typeorm';
 
 @Entity('decks')
@@ -22,6 +23,7 @@ export class Deck {
   @OneToMany(() => Card, (card) => card.deck)
   cards!: Card[];
 
+  @Index()
   @Column()
   userId!: string;
   @ManyToOne(() => User, (user) => user.decks, { onDelete: 'CASCADE' })
