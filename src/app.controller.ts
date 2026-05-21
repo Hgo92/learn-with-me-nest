@@ -14,4 +14,9 @@ export class AppController {
     // On court-circuites complètement TypeORM pour ce test
     return { status: 'ok', message: 'Zéro appel base de données' };
   }
+
+  @Get('health')
+  health() {
+    return { status: 'ok' };
+  }
 }
