@@ -56,7 +56,7 @@ export class CardsService {
 
   async archived(id: number, userId: string) {
     const card = await this.findOne(id, userId);
-    (card.isArchived, true);
+    card.isArchived = true;
     return this.cardsRepository.save(card);
   }
 }
