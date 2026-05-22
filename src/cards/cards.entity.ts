@@ -20,7 +20,7 @@ export class Card {
   @Column({ type: 'text' })
   translation!: string;
 
-  @Column()
+  @Column({ default: false })
   isArchived!: boolean;
 
   @Index()
