@@ -53,4 +53,10 @@ export class CardsService {
     const card = await this.findOne(id, userId);
     return this.cardsRepository.remove(card);
   }
+
+  async archived(id: number, userId: string) {
+    const card = await this.findOne(id, userId);
+    Object.assign(card.isArchived, true);
+    return this.cardsRepository.save(card);
+  }
 }

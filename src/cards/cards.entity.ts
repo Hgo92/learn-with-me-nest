@@ -20,6 +20,9 @@ export class Card {
   @Column({ type: 'text' })
   translation!: string;
 
+  @Column()
+  isArchived!: boolean;
+
   @Index()
   @Column()
   deckId!: number;

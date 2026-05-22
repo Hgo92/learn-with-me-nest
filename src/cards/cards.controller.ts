@@ -52,6 +52,14 @@ export class CardsController {
     return this.cardsService.update(id, newCard, session.user.id);
   }
 
+  @Put('archived/:id')
+  archived(
+    @Param('id', ParseIntPipe) id: number,
+    @Session() session: UserSession,
+  ) {
+    return this.cardsService.archived(id, session.user.id);
+  }
+
   @Delete(':id')
   remove(
     @Param('id', ParseIntPipe) id: number,
