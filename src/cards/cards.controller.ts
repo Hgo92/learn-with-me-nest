@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Put,
   Delete,
+  Patch,
 } from '@nestjs/common';
 import { CardsService } from './cards.service';
 import { Session } from '@thallesp/nestjs-better-auth';
@@ -52,7 +53,7 @@ export class CardsController {
     return this.cardsService.update(id, newCard, session.user.id);
   }
 
-  @Put('archived/:id')
+  @Patch(':id/archived')
   archived(
     @Param('id', ParseIntPipe) id: number,
     @Session() session: UserSession,
