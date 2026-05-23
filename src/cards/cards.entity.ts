@@ -7,6 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
   Index,
+  CreateDateColumn,
 } from 'typeorm';
 
 @Entity('cards')
@@ -36,4 +37,7 @@ export class Card {
   @ManyToOne(() => User, (user) => user.cards, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
   user!: User;
+
+  @CreateDateColumn()
+  createdAt!: Date;
 }
