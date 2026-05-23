@@ -53,12 +53,20 @@ export class CardsController {
     return this.cardsService.update(id, newCard, session.user.id);
   }
 
-  @Patch(':id/archived')
-  archived(
+  @Patch(':id/archive')
+  archive(
     @Param('id', ParseIntPipe) id: number,
     @Session() session: UserSession,
   ) {
-    return this.cardsService.archived(id, session.user.id);
+    return this.cardsService.archive(id, session.user.id);
+  }
+
+  @Patch(':id/activate')
+  activate(
+    @Param('id', ParseIntPipe) id: number,
+    @Session() session: UserSession,
+  ) {
+    return this.cardsService.activate(id, session.user.id);
   }
 
   @Delete(':id')
