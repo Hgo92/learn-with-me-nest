@@ -21,7 +21,7 @@ export class Account {
   @Column()
   userId!: string;
 
-  @Column({ unique: true })
+  @Column()
   providerId!: string;
 
   @Column({ nullable: true })

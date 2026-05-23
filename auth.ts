@@ -20,7 +20,6 @@ export const auth = betterAuth({
     'https://learnwithme-front.vercel.app',
   ],
   advanced: {
-    // N'active secureCookies QUE si on est sur Vercel/Production
     useSecureCookies: true,
     defaultCookieAttributes: {
       secure: true,
