@@ -43,6 +43,14 @@ export class CardsService {
     return this.cardsRepository.save(card);
   }
 
+  async createGroup(cardGroup: cardClass[], userId: string) {
+    const cards = cardGroup.map((newCard: cardClass) => {
+      const card = this.cardsRepository.create({ ...newCard, userId });
+      return this.cardsRepository.save(card);
+    });
+    return Promise.all(cards);
+  }
+
   async update(id: number, newCard: cardClass, userId: string) {
     const card = await this.findOne(id, userId);
     Object.assign(card, newCard);

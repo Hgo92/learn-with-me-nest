@@ -13,6 +13,28 @@ import { CardsService } from './cards.service';
 import { Session } from '@thallesp/nestjs-better-auth';
 import type { UserSession } from '@thallesp/nestjs-better-auth';
 import { cardClass } from './cardClass';
+import z from 'zod';
+import { openai } from '@ai-sdk/openai';
+import { generateText, Output } from 'ai';
+
+const cardSchema = z.object({
+  cards: z.array(
+    z.object({
+      title: z.string(),
+      translation: z.string(),
+      deckId: z.number(),
+      existingCards: z.string(),
+    }),
+  ),
+});
+
+type Prompt = {
+  count: number;
+  language: string;
+  deckId: number;
+  existingCards: string;
+  topic?: string;
+};
 
 @Controller('cards')
 export class CardsController {
@@ -21,14 +43,6 @@ export class CardsController {
   @Get()
   findAll(@Session() session: UserSession) {
     return this.cardsService.findAllByUser(session.user.id);
-  }
-
-  @Get('by-deck/:deckId')
-  findByDeck(
-    @Param('deckId', ParseIntPipe) deckId: number,
-    @Session() session: UserSession,
-  ) {
-    return this.cardsService.findByDeck(deckId, session.user.id);
   }
 
   @Get(':id')
@@ -42,6 +56,21 @@ export class CardsController {
   @Post()
   create(@Body() newCard: cardClass, @Session() session: UserSession) {
     return this.cardsService.create(newCard, session.user.id);
+  }
+
+  @Post('/generate-ia')
+  async generateCards(
+    @Body('prompt') prompt: Prompt,
+    @Session() session: UserSession,
+  ) {
+    const result = await generateText({
+      model: openai('gpt-4.1'),
+      output: Output.object({
+        schema: cardSchema,
+      }),
+      prompt: `Generate ${prompt.count} vocabulary cards ${prompt.topic ? `about ${prompt.topic}` : ''} with the word (title) in ${prompt.language} and the translation in French. Those words are already used (${prompt.existingCards}), don't use them. The deckId is ${prompt.deckId}.`,
+    });
+    return this.cardsService.createGroup(result.output.cards, session.user.id);
   }
 
   @Put(':id')
