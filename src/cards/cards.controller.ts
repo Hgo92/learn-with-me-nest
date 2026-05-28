@@ -68,7 +68,7 @@ export class CardsController {
     @Session() session: UserSession,
   ) {
     const result = await generateText({
-      model: groq('llama-3.3-70b-versatile'),
+      model: groq('llama-3.1-8b-instant'),
       output: Output.object({
         schema: cardSchema,
       }),
