@@ -68,7 +68,7 @@ export class CardsController {
     @Session() session: UserSession,
   ) {
     const result = await generateText({
-      model: groq('llama-3.1-8b-instant'),
+      model: groq('openai/gpt-oss-20b'),
       output: Output.object({
         schema: cardSchema,
       }),
