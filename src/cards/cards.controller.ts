@@ -14,8 +14,12 @@ import { Session } from '@thallesp/nestjs-better-auth';
 import type { UserSession } from '@thallesp/nestjs-better-auth';
 import { cardClass } from './cardClass';
 import z from 'zod';
-import { google } from '@ai-sdk/google';
+import { createGroq } from '@ai-sdk/groq';
 import { generateText, Output } from 'ai';
+
+const groq = createGroq({
+  apiKey: process.env.GROQ_API_KEY,
+});
 
 const cardSchema = z.object({
   cards: z.array(
@@ -64,7 +68,7 @@ export class CardsController {
     @Session() session: UserSession,
   ) {
     const result = await generateText({
-      model: google('gemini-2.0-flash'),
+      model: groq('llama-3.3-70b-versatile'),
       output: Output.object({
         schema: cardSchema,
       }),
