@@ -72,7 +72,7 @@ export class CardsController {
       output: Output.object({
         schema: cardSchema,
       }),
-      prompt: `Generate ${prompt.count} vocabulary cards ${prompt.topic ? `about ${prompt.topic}` : ''} with the word (title) in ${prompt.language} and the translation in French. Those words are already used (${prompt.existingCards}), don't use them. The deckId is ${prompt.deckId}.`,
+      prompt: `Generate ${prompt.count} vocabulary cards ${prompt.topic ? `about ${prompt.topic}` : ''} with the word (title) in ${prompt.language} and the translation in French. Title and translation must start with an uppercase letter. Those words are already used (${prompt.existingCards}), don't use them. The deckId is ${prompt.deckId}.`,
     });
     return this.cardsService.createGroup(result.output.cards, session.user.id);
   }
