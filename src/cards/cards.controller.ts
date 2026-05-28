@@ -14,7 +14,7 @@ import { Session } from '@thallesp/nestjs-better-auth';
 import type { UserSession } from '@thallesp/nestjs-better-auth';
 import { cardClass } from './cardClass';
 import z from 'zod';
-import { openai } from '@ai-sdk/openai';
+import { google } from '@ai-sdk/google';
 import { generateText, Output } from 'ai';
 
 const cardSchema = z.object({
@@ -64,7 +64,7 @@ export class CardsController {
     @Session() session: UserSession,
   ) {
     const result = await generateText({
-      model: openai('gpt-4.1'),
+      model: google('gemini-2.0-flash'),
       output: Output.object({
         schema: cardSchema,
       }),
